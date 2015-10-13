@@ -18,7 +18,7 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
     pip install pyDGS
     
 ### test:
-    python -c "import DGS; DGS.test.dotest()"
+    python -c "import DGSweb; DGSweb.test.dotest()"
 
  REQUIRED INPUTS:
  folder e.g. '/home/my_sediment_images'

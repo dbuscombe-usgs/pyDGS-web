@@ -85,7 +85,7 @@ A dictionary objects containing the following key/value pairs:
 * grain size bins: grain size values at which the distribution is evaluated
 
 PROCESSING NOTES:
-Note that the larger the density parameter, the longer the execution time. 
+Note that the smaller the density parameter, the longer the execution time. 
 
 ### license:
     GNU Lesser General Public License, Version 3
