@@ -42,7 +42,7 @@ def dotest_web():
    notes=8
    verbose=1
 
-   DGS.dgs(image, density, resolution, dofilter, maxscale, notes, verbose)
+   DGSweb.dgs(image, density, resolution, dofilter, maxscale, notes, verbose)
 
 if __name__ == '__main__':
    dotest()
