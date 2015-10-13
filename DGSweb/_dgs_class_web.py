@@ -82,9 +82,10 @@ Note that the larger the density parameter, the longer the execution time.
 
 import numpy as np
 import sys #, getopt, os, glob
-from PIL.Image import open as imopen
+#from PIL.Image import open as imopen
 import cwt
 import sgolay
+from scipy.misc import imread as imopen
 
 # suppress divide and invalid warnings
 np.seterr(divide='ignore')

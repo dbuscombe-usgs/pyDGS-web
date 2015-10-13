@@ -162,7 +162,7 @@ else:
         include_dirs=[np.get_include()]),
     ]
 install_requires = [
-    'numpy','scipy','Pillow','cython',
+    'numpy','scipy','cython',
 ]
 
 def setupPackage():

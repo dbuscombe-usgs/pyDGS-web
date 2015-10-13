@@ -20,10 +20,10 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
 ### install:
     python setup.py install
     sudo python setup.py install
-    pip install pyDGS
+    pip install pyDGSweb
     
 ### test:
-    python -c "import DGS; DGS.test.dotest()"
+    python -c "import DGSweb; DGSweb.test.dotest()"
 
  REQUIRED INPUTS:
  folder e.g. '/home/my_sediment_images'
@@ -51,7 +51,7 @@ A dictionary objects containing the following key/value pairs:
 
 ### processing example on one image:
     python
-    import DGS
+    import DGSweb
 
     image_file = '/home/sed_images/my_image.png'
 
@@ -61,7 +61,7 @@ A dictionary objects containing the following key/value pairs:
     notes = 8 # notes per octave
     maxscale = 8 #Max scale as inverse fraction of data length
     verbose = 1 # print stuff to screen
-    dgs_stats = DGS.dgs_web(image_file, density, resolution, dofilter, maxscale, notes, verbose)
+    dgs_stats = DGSweb.dgs(image_file, density, resolution, dofilter, maxscale, notes, verbose)
 
  REQUIRED INPUTS:
  simply a single file path
@@ -107,8 +107,8 @@ Anaconda comes with a variety of IDEs and is pretty easy to use.
 To run the test images, launch the Anaconda command terminal and type:
 
 ```
-pip install pyDGS
-python -c "import DGS; DGS.test.dotest()"
+pip install pyDGSweb
+python -c "import DGSweb; DGSweb.test.dotest()"
 ```
 
 ### Contributing & Credits

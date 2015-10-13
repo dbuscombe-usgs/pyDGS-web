@@ -23,20 +23,21 @@ For more information visit https://github.com/dbuscombe-usgs/pyDGS
 :install:
     python setup.py install
     sudo python setup.py install
-    pip install pyDGS
+    pip install pyDGSweb
     
 :test:
-    python -c "import DGS; DGS.test.dotest()"
+    python -c "import DGSweb; DGSweb.test.dotest()"
 
     python
-    import DGS
+    import DGSweb
     density = 10 # process every 10 lines
     res = 0.01 # mm/pixel
-    doplot = 0 # don't make plots
-    image_folder = '/home/sed_images'
-    DGS.dgs(image_folder,density,doplot,res)
-    image_file = '/home/sed_images/my_image.png'
-    mnsz, srt, sk, kurt, pd = DGS.dgs(image_file,density,doplot,res)
+    dofilter=1
+    maxscale=8
+    notes=8
+    verbose=1
+    image = '/home/sed_images/my_image.png'
+    results = DGSweb.dgs(image, density, res, dofilter, maxscale, notes, verbose)
     
  REQUIRED INPUTS:
  folder e.g. '/home/my_sediment_images'
@@ -44,11 +45,14 @@ For more information visit https://github.com/dbuscombe-usgs/pyDGS
  or simply a single file
 
  OPTIONAL INPUTS [default values]
- density = process every density lines of image [10]
- doplot = 0=no, 1=yes [0]
- resolution = spatial resolution of image in mm/pixel [1]
+ density = process every density lines of image [10][1 - 100]
+ resolution = spatial resolution of image in mm/pixel [1][>0]
+ dofilter = spatial resolution of image in mm/pixel [1][0 or 1]
+ notes = notes per octave to consider in continuous wavelet transform [8][1 - 8]
+ maxscale = maximum scale (pixels) as an inverse function of data (image row) length [8][2 - 40]
+ doplot = 0=no, 1=yes [0][0 or 1]
 
-Note that the larger the density parameter, the longer the execution time.
+Note that the smaller the density parameter, the longer the execution time.
 
 :license:
     GNU Lesser General Public License, Version 3
