@@ -173,7 +173,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
       print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       print "Processing image %s" % (image)   
    try:
-       im = imopen(image, flatten=1)#.convert("L")
+       im = imopen(image, flatten=1).astype('uint8')#.convert("L")
    except IOError:
        print 'cannot open', image
        sys.exit(2)
