@@ -119,7 +119,7 @@ def get_me(useregion, maxscale, notes, density): #, mult):
 
 # =========================================================
 # =========================================================
-def dgs_web(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbose=0):
+def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbose=0):
 
    if verbose==1:
       print "==========================================="
@@ -130,7 +130,7 @@ def dgs_web(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, ve
       print "==========================================="
       print "======A PROGRAM BY DANIEL BUSCOMBE========="
       print "========USGS, FLAGSTAFF, ARIZONA==========="
-      print "========REVISION 3.0.0, SEPT 2015=========="
+      print "========REVISION 0.0.1, OCT 2015==========="
       print "==========================================="
 
    # exit program if no input folder given
@@ -257,5 +257,5 @@ def dgs_web(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, ve
 # =========================================================
 if __name__ == '__main__':
 
-   dgs_web(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbose=0)
+   dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbose=0)
 

@@ -137,7 +137,7 @@ if USE_CYTHON:
       USE_CYTHON = False
 
 # Read version from distmesh/__init__.py
-with open(os.path.join('DGS', '__init__.py')) as f:
+with open(os.path.join('DGSweb', '__init__.py')) as f:
     line = f.readline()
     while not line.startswith('__version__'):
         line = f.readline()
@@ -148,17 +148,17 @@ cmdclass = { }
 
 if USE_CYTHON:
     ext_modules += [
-        Extension("DGS.cwt", [ "DGS/cwt.pyx" ],
+        Extension("DGSweb.cwt", [ "DGSweb/cwt.pyx" ],
         include_dirs=[np.get_include()]),
-        Extension("DGS.sgolay", [ "DGS/sgolay.pyx" ],
+        Extension("DGSweb.sgolay", [ "DGSweb/sgolay.pyx" ],
         include_dirs=[np.get_include()]),
     ]
     cmdclass.update({ 'build_ext': build_ext })
 else:
     ext_modules += [
-        Extension("DGS.cwt", [ "DGS/cwt.c" ],
+        Extension("DGSweb.cwt", [ "DGSweb/cwt.c" ],
         include_dirs=[np.get_include()]),
-        Extension("DGS.sgolay", [ "DGS/sgolay.c" ],
+        Extension("DGSweb.sgolay", [ "DGSweb/sgolay.c" ],
         include_dirs=[np.get_include()]),
     ]
 install_requires = [
@@ -182,16 +182,16 @@ def setupPackage():
          keywords='sediment',
          author='Daniel Buscombe',
          author_email='dbuscombe@usgs.gov',
-         url='https://github.com/dbuscombe-usgs/pyDGS',
-         download_url ='https://github.com/dbuscombe-usgs/pyDGS/archive/master.zip',
+         url='https://github.com/dbuscombe-usgs/pyDGS-web',
+         download_url ='https://github.com/dbuscombe-usgs/pyDGS-web/archive/master.zip',
          install_requires=install_requires,
          license = "GNU GENERAL PUBLIC LICENSE v3",
-         packages=['DGS'],
+         packages=['DGSweb'],
          cmdclass = cmdclass,
          ext_modules=ext_modules,
          platforms='OS Independent',
          include_dirs = [np.get_include()],
-         package_data={'DGS': ['*.JPG','*.jpg',]}
+         package_data={'DGSweb': ['*.JPG','*.jpg',]}
    )
 
 if __name__ == '__main__':
@@ -205,7 +205,7 @@ if __name__ == '__main__':
         except:
             pass
         # delete all shared libs from lib directory
-        path = os.path.join(SETUP_DIRECTORY, 'DGS')
+        path = os.path.join(SETUP_DIRECTORY, 'DGSweb')
         for filename in glob.glob(path + os.sep + '*.pyd'):
             try:
                 os.remove(filename)

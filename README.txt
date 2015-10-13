@@ -25,17 +25,6 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
 ### test:
     python -c "import DGS; DGS.test.dotest()"
 
-### processing example on a folder of images:
-    python
-    import DGS
-    density = 10 # process every 10 lines
-    res = 0.01 # mm/pixel
-    doplot = 0 # don't make plots
-    image_folder = '/home/sed_images'
-    DGS.dgs(image_folder,density,doplot,res)
-    image_file = '/home/sed_images/my_image.png'
-    mnsz, srt, sk, kurt, pd = DGS.dgs(image_file,density,doplot,res)
-
  REQUIRED INPUTS:
  folder e.g. '/home/my_sediment_images'
  if 'pwd', then the present directory is analysed
@@ -48,9 +37,6 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
  notes = notes per octave to consider in continuous wavelet transform [8][1 - 8]
  maxscale = maximum scale (pixels) as an inverse function of data (image row) length [8][2 - 40]
  doplot = 0=no, 1=yes [0][0 or 1]
-
-OUTPUT FOR A DIRECTORY OF FILES:
-A text file per image
 
 OUTPUT FOR A SINGLE IMAGE FILE:
 A dictionary objects containing the following key/value pairs:

@@ -70,7 +70,7 @@ __version__ = '0.0.1'
 # Imports
 #-----------------------------------------------------------------------------
 
-from DGS._dgs_class_web import dgs_web
-from DGS.test import *
+from DGSweb._dgs_class_web import dgs
+from DGSweb.test import *
 
 
