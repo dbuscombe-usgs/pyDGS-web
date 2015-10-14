@@ -85,7 +85,8 @@ import sys #, getopt, os, glob
 #from PIL.Image import open as imopen
 import cwt
 import sgolay
-from scipy.misc import imread as imopen
+#from scipy.misc import imread as imopen
+import imread
 
 # suppress divide and invalid warnings
 np.seterr(divide='ignore')
@@ -173,7 +174,10 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
       print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       print "Processing image %s" % (image)   
    try:
-       im = imopen(image, flatten=1).astype('uint8')#.convert("L")
+       #im = imopen(image, flatten=1).astype('uint8')#.convert("L")
+
+       im = imread.imload(image, as_grey=True)
+
    except IOError:
        print 'cannot open', image
        sys.exit(2)
