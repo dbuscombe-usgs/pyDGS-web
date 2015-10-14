@@ -177,6 +177,9 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
        #im = imopen(image, flatten=1).astype('uint8')#.convert("L")
 
        im = imread.imload(image, as_grey=True).astype('uint8')
+       nx,ny = np.shape(im)
+       if nx>ny:
+          im=im.T
 
    except IOError:
        print 'cannot open', image
