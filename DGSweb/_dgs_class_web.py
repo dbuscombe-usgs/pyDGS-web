@@ -209,8 +209,10 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
       print "Processing image %s" % (image)   
    try:
        #im = imopen(image, flatten=1).astype('uint8')#.convert("L")
+       #im = imread.imload(image, as_grey=True).astype('uint8')
+       im = imread.imload(image)
+       test = (0.299 * im[:,:,0] + 0.5870*im[:,:,1] + 0.114*im[:,:,2]).astype('uint8')
 
-       im = imread.imload(image, as_grey=True).astype('uint8')
        nx,ny = np.shape(im)
        if nx>ny:
           im=im.T
