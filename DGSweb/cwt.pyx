@@ -28,6 +28,8 @@ cimport cython
 from libc.math cimport sqrt,log,abs
 #from scipy.signal import kaiser
 
+import dask.array as da
+
 # =========================================================
 cdef class Cwt:
     """
@@ -64,6 +66,7 @@ cdef class Cwt:
                  scale = len(data)/largestscale
                  smallest scale should be >= 2 for meaningful data
         """
+
         self.win = np.shape(matrix)[0]
         self.density = density
         #self.mult = mult
@@ -98,8 +101,11 @@ cdef class Cwt:
         cdef np.ndarray[np.float64_t,ndim=1] s_omega = np.empty(ndata, dtype=np.float64)
         cdef np.ndarray[np.float64_t,ndim=1] psihat = np.empty(ndata, dtype=np.float64)
 
+        dat = da.from_array(np.asarray(matrix), chunks=100)
+
         for i from 0 <= i < lr:  
-           data = np.asarray( self._column(matrix, np.int(self.r[i]) ) )
+           #data = np.asarray( self._column(matrix, np.int(self.r[i]) ) )
+           data = np.asarray( self._column(dat, np.int(self.r[i]) ) )
            data2 = self._pad2nxtpow2(data - np.mean(data), base2) 
                       
            datahat = np.fft.fft(data2)

@@ -194,8 +194,6 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
    except IOError:
        print 'cannot open', image
        sys.exit(2)
-    
-   im = da.from_array(np.asarray(im), chunks=100)
 
    # convert to numpy array
    region = np.array(im)
