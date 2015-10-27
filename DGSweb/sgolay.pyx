@@ -88,8 +88,6 @@ cdef class sgolay2d:
        # central band
        Z[half_size:-half_size, half_size:-half_size] = z
 
-       print "i got here mofo"
-
        # top left corner
        Z[:half_size,:half_size] = z[0,0] - np.abs( np.flipud(np.fliplr(z[1:half_size+1,1:half_size+1]) ) - z[0,0] )
        # bottom right corner
@@ -99,6 +97,8 @@ cdef class sgolay2d:
        Z[:half_size,-half_size:] = Z[half_size,-half_size:] - np.abs( np.flipud(Z[half_size+1:2*half_size+1,-half_size:]) - Z[half_size,-half_size:] )
        # bottom left corner
        Z[-half_size:,:half_size] = Z[-half_size:,half_size].reshape(-1,1) - np.abs( np.fliplr(Z[-half_size:, half_size+1:2*half_size+1]) - Z[-half_size:,half_size].reshape(-1,1) )
+
+       print "i got here mofo"
 
        cdef np.ndarray[np.float64_t,ndim=2] m = np.zeros((window_size, window_size), dtype=np.float64)
 
