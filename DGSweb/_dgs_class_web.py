@@ -210,16 +210,21 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
    try:
        #im = imopen(image, flatten=1).astype('uint8')#.convert("L")
        #im = imread.imload(image, as_grey=True).astype('uint8')
-       im = imread.imload(image)
+       im = imread.imload(image)[:,:,:3]
        test = (0.299 * im[:,:,0] + 0.5870*im[:,:,1] + 0.114*im[:,:,2]).astype('uint8')
 
        nx,ny = np.shape(im)
        if nx>ny:
           im=im.T
 
-   except IOError:
-       print 'cannot open', image
-       sys.exit(2)
+   except: # IOError:
+       #print 'cannot open', image
+       #sys.exit(2)
+       im = imread.imload(image)
+
+       nx,ny = np.shape(im)
+       if nx>ny:
+          im=im.T
 
    # convert to numpy array
    region = np.array(im)
