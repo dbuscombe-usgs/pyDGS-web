@@ -42,7 +42,6 @@ cdef class sgolay2d:
        from http://www.scipy.org/Cookbook/SavitzkyGolay
        """
 
-       print "i got here"
        # number of terms in the polynomial expression
        cdef float n_terms = ( order + 1 ) * ( order + 2)  / 2.0
 
@@ -69,6 +68,8 @@ cdef class sgolay2d:
        dx = np.repeat( ind, window_size )
        cdef np.ndarray[np.float64_t,ndim=1] dy = np.empty(len(ind)*window_size, dtype=np.float64) 
        dy = np.tile( ind, [window_size, 1]).reshape(window_size**2, )
+
+       print "i got here"
 
        # build matrix of system of equation
        cdef np.ndarray[np.float64_t,ndim=2] A = np.empty( (window_size**2, len(exps)), dtype=np.float64 )
