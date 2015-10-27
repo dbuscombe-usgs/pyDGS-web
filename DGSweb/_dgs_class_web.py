@@ -125,7 +125,7 @@ def get_me(useregion, maxscale, notes, density): #, mult):
       except:
          density = density +1
 
-   return dat.getvar(), (np.pi/2)*dat.getscales()
+   return dat.getvar(), (np.pi/2)*dat.getscales(), density
 
 # =========================================================
 # =========================================================
@@ -212,6 +212,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
       try:
          Zf = sgolay.sgolay2d( region, window_size, order=3).getdata()
       except:
+         print "Due to memory constraints, image was not filtered"
          useregion = rescale(region,0,255)
 
       # rescale filtered image to full 8-bit range
@@ -223,7 +224,13 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
    # ======= stage 3 ==========================
    # call cwt to get particle size distribution
-   d, scales = get_me(useregion, maxscale, notes, density) #mult
+   d, scales, newdensity = get_me(useregion, maxscale, notes, density) #mult
+
+   if newdensity != density:
+      if verbose==1:
+         print "Due to memory constraints, image was processed using a density of ", newdensity   
+
+
    d = d/np.sum(d)
    d = d/(scales**0.5)
    d = d/np.sum(d)
@@ -269,7 +276,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
    # ======= stage 6 ==========================
    # return a dict object of stats
-   return {'mean grain size': mnsz, 'grain size sorting': srt, 'grain size skewness': sk, 'grain size kurtosis': kurt, 'percentiles': pd, 'grain size frequencies': d, 'grain size bins': scales}
+   return {'mean grain size': mnsz, 'grain size sorting': srt, 'grain size skewness': sk, 'grain size kurtosis': kurt, 'percentiles': pd, 'grain size frequencies': d, 'grain size bins': scales, 'processing density': newdensity}
 
 
 # =========================================================
