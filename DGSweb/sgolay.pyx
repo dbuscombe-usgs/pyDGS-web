@@ -5,6 +5,7 @@
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
  First Revision January 18 2013
+ Revision Oct 27, 2015
 
 For more information visit https://github.com/dbuscombe-usgs/DGS-python
 

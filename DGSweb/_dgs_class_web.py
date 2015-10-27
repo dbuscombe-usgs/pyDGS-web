@@ -15,7 +15,7 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
- Revision Sept 7, 2015
+ Revision Oct 27, 2015
  First Revision January 18 2013   
 
 For more information visit https://github.com/dbuscombe-usgs/pyDGS
@@ -164,7 +164,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
       print "==========================================="
       print "======A PROGRAM BY DANIEL BUSCOMBE========="
       print "========USGS, FLAGSTAFF, ARIZONA==========="
-      print "========REVISION 0.0.1, OCT 2015==========="
+      print "========REVISION 0.0.2, OCT 2015==========="
       print "==========================================="
 
    # exit program if no input folder given
@@ -299,22 +299,4 @@ if __name__ == '__main__':
 
    dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbose=0)
 
-      #if isodd(mn/4):
-      #     window_size = (int(mn/4))
-      #else:
-      #     window_size = (int(mn/4))-1
-
-      #if iseven(window_size):
-      #   window_size = window_size+1
-
-      #try:
-      #   Zf = sgolay.sgolay2d( region, window_size, order=3).getdata()
-
-      #   # rescale filtered image to full 8-bit range
-      #   useregion = rescale(region-Zf[:nx,:ny],0,255)
-      #   del Zf
-
-      #except MemoryError:
-      #   print "Due to memory constraints, image was not filtered"
-      #   useregion = rescale(region,0,255)
 
