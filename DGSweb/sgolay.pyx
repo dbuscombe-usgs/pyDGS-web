@@ -44,6 +44,7 @@ cdef class sgolay2d:
        from http://www.scipy.org/Cookbook/SavitzkyGolay
        """
 
+       print "i got here"
        # number of terms in the polynomial expression
        cdef float n_terms = ( order + 1 ) * ( order + 2)  / 2.0
 
