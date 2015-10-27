@@ -128,6 +128,31 @@ def get_me(useregion, maxscale, notes, density): #, mult):
    return dat.getvar(), (np.pi/2)*dat.getscales()
 
 # =========================================================
+def filter_me(region, mn, nx, ny):
+
+   if isodd(mn/4):
+        window_size = (int(mn/4))
+   else:
+        window_size = (int(mn/4))-1
+
+   if iseven(window_size):
+      window_size = window_size+1
+
+   complete=0
+   while complete==0:
+      try:
+         Zf = sgolay.sgolay2d( region, window_size, order=3).getdata()
+         # rescale filtered image to full 8-bit range
+         useregion = rescale(region-Zf[:nx,:ny],0,255)
+         if 'useregion' in locals(): 
+            complete=1
+
+      except:
+         window_size = window_size+3
+
+   return useregion
+
+# =========================================================
 # =========================================================
 def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbose=0):
 
@@ -201,23 +226,26 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
    # ======= stage 2 ==========================
    # if requested, call sgolay to filter image
    if dofilter==1:
-      if isodd(mn/4):
-           window_size = (int(mn/4))
-      else:
-           window_size = (int(mn/4))-1
+      use_region = filter_me(region, mn, nx, ny)
 
-      if iseven(window_size):
-         window_size = window_size+1
+      #if isodd(mn/4):
+      #     window_size = (int(mn/4))
+      #else:
+      #     window_size = (int(mn/4))-1
 
-      try:
-         Zf = sgolay.sgolay2d( region, window_size, order=3).getdata()
-      except MemoryError:
-         print "Due to memory constraints, image was not filtered"
-         useregion = rescale(region,0,255)
+      #if iseven(window_size):
+      #   window_size = window_size+1
 
-      # rescale filtered image to full 8-bit range
-      useregion = rescale(region-Zf[:nx,:ny],0,255)
-      del Zf
+      #try:
+      #   Zf = sgolay.sgolay2d( region, window_size, order=3).getdata()
+
+      #   # rescale filtered image to full 8-bit range
+      #   useregion = rescale(region-Zf[:nx,:ny],0,255)
+      #   del Zf
+
+      #except MemoryError:
+      #   print "Due to memory constraints, image was not filtered"
+      #   useregion = rescale(region,0,255)
 
    else: #no filtering
       useregion = rescale(region,0,255)
