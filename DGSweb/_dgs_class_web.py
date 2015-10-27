@@ -140,14 +140,14 @@ def filter_me(region, mn, nx, ny):
 
    #complete=0
    #while complete==0:
-   try:
+   if (nx*ny)<400000:
       Zf = sgolay.sgolay2d( region, window_size, order=3).getdata()
       # rescale filtered image to full 8-bit range
       useregion = rescale(region-Zf[:nx,:ny],0,255)
       #if 'useregion' in locals(): 
       #   complete=1
 
-   except:
+   else:
       Zf = slow_sgolay2d ( region, window_size, order=3, derivative=None)
       # rescale filtered image to full 8-bit range
       useregion = rescale(region-Zf[:nx,:ny],0,255)
