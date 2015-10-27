@@ -69,8 +69,6 @@ cdef class sgolay2d:
        cdef np.ndarray[np.float64_t,ndim=1] dy = np.empty(len(ind)*window_size, dtype=np.float64) 
        dy = np.tile( ind, [window_size, 1]).reshape(window_size**2, )
 
-       print "i got here"
-
        # build matrix of system of equation
        cdef np.ndarray[np.float64_t,ndim=2] A = np.empty( (window_size**2, len(exps)), dtype=np.float64 )
        for i, exp in enumerate( exps ):
@@ -80,6 +78,9 @@ cdef class sgolay2d:
        cdef np.ndarray[np.float64_t,ndim=2] Z = np.zeros( (z.shape[0] + 2*half_size, z.shape[1] + 2*half_size), dtype=np.float64 )
        # top band
        Z[:half_size, half_size:-half_size] =  z[0, :] -  np.abs( np.flipud( z[1:half_size+1, :] ) - z[0, :] )
+
+       print "i got here"
+
        # bottom band
        Z[-half_size:, half_size:-half_size] = z[-1, :]  + np.abs( np.flipud( z[-half_size-1:-1, :] )  -z[-1, :] )
        # left band
