@@ -105,7 +105,7 @@ cdef class Cwt:
 
         for i from 0 <= i < lr:  
            #data = np.asarray( self._column(matrix, np.int(self.r[i]) ) )
-           data = np.asarray( self._column(dat, np.int(self.r[i]) ) ) #dask implementation
+           data = np.asarray( self._column(np.asarray(dat), np.int(self.r[i]) ) ) #dask implementation
            data2 = self._pad2nxtpow2(data - np.mean(data), base2) 
                       
            datahat = np.fft.fft(data2)
