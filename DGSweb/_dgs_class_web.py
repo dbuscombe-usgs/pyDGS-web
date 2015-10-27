@@ -122,7 +122,7 @@ def get_me(useregion, maxscale, notes, density): #, mult):
          dat = cwt.Cwt(np.asarray(useregion,'int8'), maxscale, notes, density) #, mult)
          if 'dat' in locals(): 
             complete=1
-      except:
+      except MemoryError:
          density = density +1
 
    return dat.getvar(), (np.pi/2)*dat.getscales(), density
@@ -211,7 +211,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
       try:
          Zf = sgolay.sgolay2d( region, window_size, order=3).getdata()
-      except:
+      except MemoryError:
          print "Due to memory constraints, image was not filtered"
          useregion = rescale(region,0,255)
 
