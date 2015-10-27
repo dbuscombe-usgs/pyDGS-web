@@ -26,8 +26,6 @@ cimport numpy as np
 cimport cython
 import scipy.signal as sp
 
-import dask.array as da
-
 # =========================================================
 cdef class sgolay2d:
             
@@ -38,7 +36,7 @@ cdef class sgolay2d:
     @cython.cdivision(True)
     @cython.wraparound(False)
     @cython.nonecheck(False)
-    def __init__(self, np.ndarray[np.uint8_t, ndim=2] z, int window_size, int order ):
+    def __cinit__(self, np.ndarray[np.uint8_t, ndim=2] z, int window_size, int order ):
        """
        do 2d filtering on matrix
        from http://www.scipy.org/Cookbook/SavitzkyGolay
@@ -100,20 +98,21 @@ cdef class sgolay2d:
        # bottom left corner
        Z[-half_size:,:half_size] = Z[-half_size:,half_size].reshape(-1,1) - np.abs( np.fliplr(Z[-half_size:, half_size+1:2*half_size+1]) - Z[-half_size:,half_size].reshape(-1,1) )
 
-       Zdask = da.from_array(Z.astype('f'), chunks=1000) #dask implementation
-
        cdef np.ndarray[np.float64_t,ndim=2] m = np.zeros((window_size, window_size), dtype=np.float64)
        # solve system and convolve
        m = np.linalg.pinv(A)[0].reshape((window_size, -1))
        cdef np.ndarray[np.float64_t,ndim=2] out = np.zeros( np.shape(z), dtype=np.float64 )
-       #out = sp.fftconvolve(Z.astype('f'), m.astype('f'), mode='valid')
-       out = sp.fftconvolve(Zdask, m.astype('f'), mode='valid') #dask implementation
+       out = sp.fftconvolve(Z.astype('f'), m.astype('f'), mode='valid')
 
        self.data = out
        return
 
     # =========================================================    
-    def getdata(self):
+    @cython.boundscheck(False)
+    @cython.cdivision(True)
+    @cython.wraparound(False)
+    @cython.nonecheck(False)
+    cpdef np.ndarray getdata(self):
        return self.data
        
        

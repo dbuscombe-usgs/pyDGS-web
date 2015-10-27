@@ -26,7 +26,6 @@ import numpy as np
 cimport numpy as np
 cimport cython
 from libc.math cimport sqrt,log,abs
-#from scipy.signal import kaiser
 
 # =========================================================
 cdef class Cwt:
@@ -46,7 +45,6 @@ cdef class Cwt:
     cdef object win
     cdef object density
     cdef object r
-    #cdef object mult
                 
     # =========================================================
     @cython.boundscheck(False)
@@ -67,14 +65,10 @@ cdef class Cwt:
 
         self.win = np.shape(matrix)[0]
         self.density = density
-        #self.mult = mult
                 
         cdef float pi = 3.14159265
         
         cdef np.ndarray r
-
-        while self.win / self.density > 100:
-           density = density+1
            
         r = np.arange(1,self.win-1,self.density, dtype=np.int)
         r = r[r<self.win]

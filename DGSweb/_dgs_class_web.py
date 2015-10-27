@@ -224,12 +224,11 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
    # ======= stage 3 ==========================
    # call cwt to get particle size distribution
-   d, scales, newdensity = get_me(useregion, maxscale, notes, density) #mult
 
-   if newdensity != density:
-      if verbose==1:
-         print "Due to memory constraints, image was processed using a density of ", newdensity   
+   while (np.shape(useregion)[0] / density) > 100:
+      density = density+1
 
+   d, scales = get_me(useregion, maxscale, notes, density) #mult
 
    d = d/np.sum(d)
    d = d/(scales**0.5)
