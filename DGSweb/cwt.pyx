@@ -187,9 +187,6 @@ cdef class Cwt:
         """
         return power spectra
         """
-        print self.nscale
-        print self.win
-        print len(self.r)
 
         cdef np.ndarray[np.float32_t, ndim=3] wave = np.empty((self.nscale,self.win,len(self.r)), np.float32)
         for i from 0 <= i < len(self.r):  

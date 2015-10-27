@@ -202,9 +202,9 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
    # if requested, call sgolay to filter image
    if dofilter==1:
       if isodd(mn/4):
-           window_size = (int(mn/6))
+           window_size = (int(mn/4))
       else:
-           window_size = (int(mn/6))-1
+           window_size = (int(mn/4))-1
 
       if iseven(window_size):
          window_size = window_size+1
