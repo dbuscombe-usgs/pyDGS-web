@@ -275,7 +275,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
    # ======= stage 6 ==========================
    # return a dict object of stats
-   return {'mean grain size': mnsz, 'grain size sorting': srt, 'grain size skewness': sk, 'grain size kurtosis': kurt, 'percentiles': pd, 'grain size frequencies': d, 'grain size bins': scales, 'processing density': newdensity}
+   return {'mean grain size': mnsz, 'grain size sorting': srt, 'grain size skewness': sk, 'grain size kurtosis': kurt, 'percentiles': pd, 'grain size frequencies': d, 'grain size bins': scales}
 
 
 # =========================================================
