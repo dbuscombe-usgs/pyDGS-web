@@ -88,6 +88,8 @@ import sgolay
 #from scipy.misc import imread as imopen
 import imread
 
+import dask.array as da
+
 # suppress divide and invalid warnings
 np.seterr(divide='ignore')
 np.seterr(invalid='ignore')
@@ -193,6 +195,8 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
        print 'cannot open', image
        sys.exit(2)
     
+   im = da.from_array(np.asarray(im), chunks=100)
+
    # convert to numpy array
    region = np.array(im)
    nx, ny = np.shape(region)
