@@ -101,11 +101,9 @@ cdef class Cwt:
         cdef np.ndarray[np.float64_t,ndim=1] s_omega = np.empty(ndata, dtype=np.float64)
         cdef np.ndarray[np.float64_t,ndim=1] psihat = np.empty(ndata, dtype=np.float64)
 
-        dat = da.from_array(np.asarray(matrix), chunks=100) #dask implementation
 
         for i from 0 <= i < lr:  
-           #data = np.asarray( self._column(matrix, np.int(self.r[i]) ) )
-           data = np.asarray( self._column(np.asarray(dat), np.int(self.r[i]) ) ) #dask implementation
+           data = np.asarray( self._column(matrix, np.int(self.r[i]) ) )
            data2 = self._pad2nxtpow2(data - np.mean(data), base2) 
                       
            datahat = np.fft.fft(data2)
@@ -216,7 +214,7 @@ cdef class Cwt:
         #n = np.r_[0:len(self.scales)]-(len(self.scales)-1)/2
         wave = self._getwave()
         
-        cdef np.ndarray[np.float64_t, ndim=1] dat= np.empty(len(self.scales), np.float64)
+        cdef np.ndarray[np.float32_t, ndim=1] dat= np.empty(len(self.scales), np.float32)
         dat = np.var(np.var(wave.T,axis=1),axis=0)
         dat = dat/np.sum(dat)
         
