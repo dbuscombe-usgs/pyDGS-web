@@ -125,7 +125,7 @@ def get_me(useregion, maxscale, notes, density): #, mult):
       except MemoryError:
          density = density +1
 
-   return dat.getvar(), (np.pi/2)*dat.getscales(), density
+   return dat.getvar(), (np.pi/2)*dat.getscales()
 
 # =========================================================
 # =========================================================
