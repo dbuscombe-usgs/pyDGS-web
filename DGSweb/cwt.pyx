@@ -28,8 +28,6 @@ cimport cython
 from libc.math cimport sqrt,log,abs
 #from scipy.signal import kaiser
 
-import dask.array as da
-
 # =========================================================
 cdef class Cwt:
     """
@@ -74,6 +72,10 @@ cdef class Cwt:
         cdef float pi = 3.14159265
         
         cdef np.ndarray r
+
+        while self.win / self.density > 100:
+           density = density+1
+           
         r = np.arange(1,self.win-1,self.density, dtype=np.int)
         r = r[r<self.win]
         self.r = r
@@ -195,7 +197,7 @@ cdef class Cwt:
         print self.win
         print len(self.r)
 
-        cdef np.ndarray[np.float16_t, ndim=3] wave = np.empty((self.nscale,self.win,len(self.r)), np.float16)
+        cdef np.ndarray[np.float32_t, ndim=3] wave = np.empty((self.nscale,self.win,len(self.r)), np.float32)
         for i from 0 <= i < len(self.r):  
            wave[:,:,i] = np.tile(self.scales**-1, (self.win,1)).T*(abs(self.cwt[:,0:self.win,i])**2)
         return wave
@@ -214,7 +216,7 @@ cdef class Cwt:
         #n = np.r_[0:len(self.scales)]-(len(self.scales)-1)/2
         wave = self._getwave()
         
-        cdef np.ndarray[np.float16_t, ndim=1] dat= np.empty(len(self.scales), np.float16)
+        cdef np.ndarray[np.float32_t, ndim=1] dat= np.empty(len(self.scales), np.float32)
         dat = np.var(np.var(wave.T,axis=1),axis=0)
         dat = dat/np.sum(dat)
         
