@@ -148,7 +148,7 @@ def filter_me(region, mn, nx, ny):
             complete=1
 
       except:
-         window_size = window_size+6
+         window_size = window_size+9
          print "window size is", str(window_size)
 
    return useregion
