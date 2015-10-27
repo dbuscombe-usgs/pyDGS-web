@@ -93,7 +93,8 @@ cdef class sgolay2d:
        print "i got here mofo"
        # seg faults here
        # bottom right corner
-       Z[-half_size:,-half_size:] = z[-1,-1] + np.abs( np.flipud(np.fliplr(z[-half_size-1:-1,-half_size-1:-1]) ) - z[-1,-1] )
+       #Z[-half_size:,-half_size:] = z[-1,-1] + np.abs( np.flipud(np.fliplr(z[-half_size-1:-1,-half_size-1:-1]) ) - z[-1,-1] )
+       Z[-half_size:,-half_size:] = z[-1,-1] + np.abs( np.flipud(z[-half_size-1:-1,-half_size-1:-1][:,::-1]) - z[-1,-1] )
 
        print "i did not got here mofo"
 
