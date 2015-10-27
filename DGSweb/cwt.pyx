@@ -101,11 +101,11 @@ cdef class Cwt:
         cdef np.ndarray[np.float64_t,ndim=1] s_omega = np.empty(ndata, dtype=np.float64)
         cdef np.ndarray[np.float64_t,ndim=1] psihat = np.empty(ndata, dtype=np.float64)
 
-        dat = da.from_array(np.asarray(matrix), chunks=100)
+        dat = da.from_array(np.asarray(matrix), chunks=100) #dask implementation
 
         for i from 0 <= i < lr:  
            #data = np.asarray( self._column(matrix, np.int(self.r[i]) ) )
-           data = np.asarray( self._column(dat, np.int(self.r[i]) ) )
+           data = np.asarray( self._column(dat, np.int(self.r[i]) ) ) #dask implementation
            data2 = self._pad2nxtpow2(data - np.mean(data), base2) 
                       
            datahat = np.fft.fft(data2)
@@ -193,7 +193,11 @@ cdef class Cwt:
         """
         return power spectra
         """
-        cdef np.ndarray[np.float64_t, ndim=3] wave = np.empty((self.nscale,self.win,len(self.r)), np.float64)
+        print self.nscale
+        print self.win
+        print len(self.r)
+
+        cdef np.ndarray[np.float32_t, ndim=3] wave = np.empty((self.nscale,self.win,len(self.r)), np.float32)
         for i from 0 <= i < len(self.r):  
            wave[:,:,i] = np.tile(self.scales**-1, (self.win,1)).T*(abs(self.cwt[:,0:self.win,i])**2)
         return wave
