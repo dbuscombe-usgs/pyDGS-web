@@ -88,6 +88,8 @@ import sgolay
 #from scipy.misc import imread as imopen
 from imread import imread
 
+import scipy.signal as sp
+
 # suppress divide and invalid warnings
 np.seterr(divide='ignore')
 np.seterr(invalid='ignore')
@@ -148,7 +150,6 @@ def filter_me(region, mn, nx, ny):
       #   complete=1
 
    else:
-      import scipy.signal as sp
       Zf = slow_sgolay2d ( region, window_size, order=3, derivative=None)
       # rescale filtered image to full 8-bit range
       useregion = rescale(region-Zf[:nx,:ny],0,255)
