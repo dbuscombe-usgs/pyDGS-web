@@ -226,7 +226,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
    # ======= stage 2 ==========================
    # if requested, call sgolay to filter image
    if dofilter==1:
-      use_region = filter_me(region, mn, nx, ny)
+      useregion = filter_me(region, mn, nx, ny)
 
       #if isodd(mn/4):
       #     window_size = (int(mn/4))
