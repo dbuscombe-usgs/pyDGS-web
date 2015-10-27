@@ -88,8 +88,6 @@ import sgolay
 #from scipy.misc import imread as imopen
 import imread
 
-import dask.array as da
-
 # suppress divide and invalid warnings
 np.seterr(divide='ignore')
 np.seterr(invalid='ignore')
