@@ -87,15 +87,21 @@ cdef class sgolay2d:
        Z[-half_size:, half_size:-half_size] = z[-1, :]  + abs( z[-half_size-1:-1, :][::-1,...]  -z[-1, :] )
 
        # left band
-       Z[half_size:-half_size, :half_size] = np.tile( z[:,0].reshape(-1,1), [1,half_size]) - abs( np.fliplr( z[:, 1:half_size+1] ) - np.tile( z[:,0].reshape(-1,1), [1,half_size]) )
+       #Z[half_size:-half_size, :half_size] = np.tile( z[:,0].reshape(-1,1), [1,half_size]) - abs( np.fliplr( z[:, 1:half_size+1] ) - np.tile( z[:,0].reshape(-1,1), [1,half_size]) )
+       Z[half_size:-half_size, :half_size] = np.tile( z[:,0].reshape(-1,1), [1,half_size]) - abs( z[:, 1:half_size+1][:,::-1] - np.tile( z[:,0].reshape(-1,1), [1,half_size]) )
+
+
        # right band
-       Z[half_size:-half_size, -half_size:] =  np.tile( z[:,-1].reshape(-1,1), [1,half_size] ) + abs( np.fliplr( z[:, -half_size-1:-1] ) - np.tile( z[:,-1].reshape(-1,1), [1,half_size] ) )
+       #Z[half_size:-half_size, -half_size:] =  np.tile( z[:,-1].reshape(-1,1), [1,half_size] ) + abs( np.fliplr( z[:, -half_size-1:-1] ) - np.tile( z[:,-1].reshape(-1,1), [1,half_size] ) )
+       Z[half_size:-half_size, -half_size:] =  np.tile( z[:,-1].reshape(-1,1), [1,half_size] ) + abs( z[:, -half_size-1:-1][:,::-1] - np.tile( z[:,-1].reshape(-1,1), [1,half_size] ) )
+
        # central band
        Z[half_size:-half_size, half_size:-half_size] = z
 
        # top left corner
        #Z[:half_size,:half_size] = z[0,0] - abs( np.flipud(np.fliplr(z[1:half_size+1,1:half_size+1]) ) - z[0,0] )
-       Z[:half_size,:half_size] = abs( np.fliplr(z[1:half_size+1,1:half_size+1])[::-1,...] )
+       #Z[:half_size,:half_size] = abs( np.fliplr(z[1:half_size+1,1:half_size+1])[::-1,...] )
+       Z[:half_size,:half_size] = abs( z[1:half_size+1,1:half_size+1][:,::-1][::-1,...] )
 
        # seg faults here
        # bottom right corner
@@ -107,7 +113,8 @@ cdef class sgolay2d:
        Z[:half_size,-half_size:] = Z[half_size,-half_size:] - abs( Z[half_size+1:2*half_size+1,-half_size:][::-1,...] - Z[half_size,-half_size:] )
 
        # bottom left corner
-       Z[-half_size:,:half_size] = Z[-half_size:,half_size].reshape(-1,1) - abs( np.fliplr(Z[-half_size:, half_size+1:2*half_size+1]) - Z[-half_size:,half_size].reshape(-1,1) )
+       #Z[-half_size:,:half_size] = Z[-half_size:,half_size].reshape(-1,1) - abs( np.fliplr(Z[-half_size:, half_size+1:2*half_size+1]) - Z[-half_size:,half_size].reshape(-1,1) )
+       Z[-half_size:,:half_size] = Z[-half_size:,half_size].reshape(-1,1) - abs( Z[-half_size:, half_size+1:2*half_size+1][:,::-1] - Z[-half_size:,half_size].reshape(-1,1) )
 
        cdef np.ndarray[np.float64_t,ndim=2] m = np.zeros((window_size, window_size), dtype=np.float64)
 
