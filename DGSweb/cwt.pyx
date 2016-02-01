@@ -4,7 +4,7 @@
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
- Revision Oct 27, 2015
+ Revision Feb 1, 2016
  First Revision January 18 2013
 
 For more information visit https://github.com/dbuscombe-usgs/DGS-python
@@ -122,7 +122,8 @@ cdef class Cwt:
         '''
         utility function to return (integer) log2
         '''
-        return int(log(x+0.0001)/ log(2.0)+0.0001)
+        with nogil:
+           return int(log(x+0.0001)/ log(2.0)+0.0001)
         
     # =========================================================
     @cython.boundscheck(False)   

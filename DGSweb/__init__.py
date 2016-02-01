@@ -15,7 +15,7 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
- Revision Oct 27, 2015
+ Revision Feb 1, 2016
  First Revision January 18 2013   
 
 For more information visit https://github.com/dbuscombe-usgs/pyDGS
@@ -68,7 +68,7 @@ Note that the smaller the density parameter, the longer the execution time.
     
 """
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 #-----------------------------------------------------------------------------
 # Imports

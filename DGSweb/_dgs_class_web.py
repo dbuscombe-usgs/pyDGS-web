@@ -15,7 +15,7 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
- Revision Oct 27, 2015
+ Revision Feb 1, 2016
  First Revision January 18 2013   
 
 For more information visit https://github.com/dbuscombe-usgs/pyDGS
@@ -164,7 +164,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
       print "==========================================="
       print "======A PROGRAM BY DANIEL BUSCOMBE========="
       print "========USGS, FLAGSTAFF, ARIZONA==========="
-      print "========REVISION 0.0.2, OCT 2015==========="
+      print "========REVISION 0.0.3, FEB 2016==========="
       print "==========================================="
 
    # exit program if no input folder given
