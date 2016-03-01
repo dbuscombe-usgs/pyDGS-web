@@ -15,44 +15,10 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
- Revision Feb 1, 2016
+ Revision Mar 1, 2016
  First Revision January 18 2013   
 
 For more information visit https://github.com/dbuscombe-usgs/pyDGS
-
-:install:
-    python setup.py install
-    sudo python setup.py install
-    pip install pyDGSweb
-    
-:test:
-    python -c "import DGSweb; DGSweb.test.dotest()"
-
-    python
-    import DGSweb
-    density = 10 # process every 10 lines
-    res = 0.01 # mm/pixel
-    dofilter=1
-    maxscale=8
-    notes=8
-    verbose=1
-    image = '/home/sed_images/my_image.png'
-    results = DGSweb.dgs(image, density, res, dofilter, maxscale, notes, verbose)
-    
- REQUIRED INPUTS:
- folder e.g. '/home/my_sediment_images'
- if 'pwd', then the present directory is analysed
- or simply a single file
-
- OPTIONAL INPUTS [default values]
- density = process every density lines of image [10][1 - 100]
- resolution = spatial resolution of image in mm/pixel [1][>0]
- dofilter = spatial resolution of image in mm/pixel [1][0 or 1]
- notes = notes per octave to consider in continuous wavelet transform [8][1 - 8]
- maxscale = maximum scale (pixels) as an inverse function of data (image row) length [8][2 - 40]
- doplot = 0=no, 1=yes [0][0 or 1]
-
-Note that the smaller the density parameter, the longer the execution time.
 
 :license:
     GNU Lesser General Public License, Version 3
@@ -68,13 +34,13 @@ Note that the smaller the density parameter, the longer the execution time.
     
 """
 
-__version__ = '0.0.3'
+__version__ = '3.0.3'
 
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
 
-from DGSweb._dgs_class_web import dgs
-from DGSweb.test import *
+from DGS._dgs_class_web import dgs
+from DGS.test import *
 
 

@@ -15,7 +15,7 @@ http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
- Revision Feb 1, 2016
+ Revision Mar 1, 2016
  First Revision January 18 2013   
 
 For more information visit https://github.com/dbuscombe-usgs/pyDGS
@@ -23,10 +23,10 @@ For more information visit https://github.com/dbuscombe-usgs/pyDGS
 :install:
     python setup.py install
     sudo python setup.py install
-    pip install pyDGS-web
+    pip install pyDGS
     
 :test:
-    python -c "import DGS; DGS.test.dotest_web()"
+    python -c "import DGS; DGS.test.dotest()"
 
     python
     import DGS
@@ -39,7 +39,7 @@ For more information visit https://github.com/dbuscombe-usgs/pyDGS
     notes = 8 # notes per octave
     maxscale = 8 #Max scale as inverse fraction of data length
     verbose = 1 # print stuff to screen
-    dgs_stats = DGS.dgs_web(image_file, density, resolution, dofilter, maxscale, notes, verbose)
+    dgs_stats = DGS.dgs(image_file, density, resolution, dofilter, maxscale, notes, verbose)
 
  REQUIRED INPUTS:
  simply a single file path
@@ -164,7 +164,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
       print "==========================================="
       print "======A PROGRAM BY DANIEL BUSCOMBE========="
       print "========USGS, FLAGSTAFF, ARIZONA==========="
-      print "========REVISION 0.0.3, FEB 2016==========="
+      print "========REVISION 3.0.3, MAR 2016==========="
       print "==========================================="
 
    # exit program if no input folder given
@@ -253,7 +253,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
    # ======= stage 4 ==========================
    # trim particle size bins
-   index = np.nonzero(scales<ny/3)
+   index = np.nonzero(scales<ny/4)
    scales = scales[index]
    d = d[index]
    d = d/np.sum(d)
@@ -269,6 +269,10 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
    # get real scales by multiplying by resolution (mm/pixel)
    scales = scales*resolution
+
+   # area-by-number to volume-by-number
+   x = -1 # conversion constant
+   r_v = (d*scales**x) / np.sum(d*scales**x) #volume-by-weight proportion
 
    # ======= stage 5 ==========================
    # calc particle size stats
@@ -292,7 +296,7 @@ def dgs(image, density=10, resolution=1, dofilter=1, maxscale=8, notes=8, verbos
 
    # ======= stage 6 ==========================
    # return a dict object of stats
-   return {'mean grain size': mnsz, 'grain size sorting': srt, 'grain size skewness': sk, 'grain size kurtosis': kurt, 'percentiles': pd, 'grain size frequencies': d, 'grain size bins': scales}
+   return {'mean grain size': mnsz, 'grain size sorting': srt, 'grain size skewness': sk, 'grain size kurtosis': kurt, 'percentiles': [.05,.1,.16,.25,.5,.75,.84,.9,.95], 'percentile_values': pd, 'grain size frequencies': d, 'grain size bins': scales}
 
 
 # =========================================================

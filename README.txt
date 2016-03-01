@@ -4,31 +4,24 @@
 
 pyDGS - a Python framework for wavelet-based digital grain size analysis
 
-pyDGS is an open-source project dedicated to provide a Python framework 
-to compute estimates of grain size distribution  using the continuous 
-wavelet transform method of Buscombe (2013) from an image of sediment 
-where grains are clearly resolved. DOES NOT REQUIRE CALIBRATION
+pyDGS is an open-source project dedicated to provide a Python framework to compute estimates of grain size distribution  using the continuous wavelet transform method of Buscombe (2013) from an image of sediment where grains are clearly resolved. DOES NOT REQUIRE CALIBRATION
 
 This program implements the algorithm of:
 
-Buscombe, D. (2013) Transferable Wavelet Method for Grain-Size 
-Distribution from Images of Sediment Surfaces and Thin Sections, 
-and Other Natural Granular Patterns. Sedimentology 60, 1709-1732
+Buscombe, D. (2013) Transferable Wavelet Method for Grain-Size Distribution from Images of Sediment Surfaces and Thin Sections, and Other Natural Granular Patterns. Sedimentology 60, 1709-1732
 
 http://dbuscombe-usgs.github.io/docs/Buscombe2013_Sedimentology_sed12049.pdf
 
 ### install:
     python setup.py install
     sudo python setup.py install
-    pip install pyDGSweb
+    pip install pyDGS
     
 ### test:
-    python -c "import DGSweb; DGSweb.test.dotest()"
+    python -c "import DGS; DGS.test.dotest()"
 
  REQUIRED INPUTS:
- folder e.g. '/home/my_sediment_images'
- if 'pwd', then the present directory is analysed
- or simply a single file
+ image name e.g. '/home/sed_images/my_image.png'
  
  OPTIONAL INPUTS [default values][range of acceptable values]
  density = process every density lines of image [10][1 - 100]
@@ -49,9 +42,9 @@ A dictionary objects containing the following key/value pairs:
 * grain size bins: grain size values at which the distribution is evaluated
 
 
-### processing example on one image:
+### processing example on 1 image:
     python
-    import DGSweb
+    import DGS
 
     image_file = '/home/sed_images/my_image.png'
 
@@ -61,7 +54,7 @@ A dictionary objects containing the following key/value pairs:
     notes = 8 # notes per octave
     maxscale = 8 #Max scale as inverse fraction of data length
     verbose = 1 # print stuff to screen
-    dgs_stats = DGSweb.dgs(image_file, density, resolution, dofilter, maxscale, notes, verbose)
+    dgs_stats = DGS.dgs(image_file, density, resolution, dofilter, maxscale, notes, verbose)
 
  REQUIRED INPUTS:
  simply a single file path
@@ -85,7 +78,7 @@ A dictionary objects containing the following key/value pairs:
 * grain size bins: grain size values at which the distribution is evaluated
 
 PROCESSING NOTES:
-Note that the smaller the density parameter, the longer the execution time. 
+Note that the larger the density parameter, the longer the execution time. 
 
 ### license:
     GNU Lesser General Public License, Version 3
@@ -101,28 +94,24 @@ Note that the smaller the density parameter, the longer the execution time.
     
 ### Note for Windows Users
 
-I recommend the Anaconda python distribution for Windows which includes 
-all of the library dependencies required to run this program. 
-Anaconda comes with a variety of IDEs and is pretty easy to use. 
-To run the test images, launch the Anaconda command terminal and type:
+I recommend the Anaconda python distribution for Windows which includes all of the library dependencies required to run this program. Anaconda comes with a variety of IDEs and is pretty easy to use. To run the test images, launch the Anaconda command terminal and type:
 
 ```
-pip install pyDGSweb
-python -c "import DGSweb; DGSweb.test.dotest()"
+pip install pyDGS
+python -c "import DGS; DGS.test.dotest()"
 ```
 
 ### Contributing & Credits
 
 This program implements the algorithm of 
-Buscombe, D. (2013) Transferable Wavelet Method for Grain-Size Distribution 
-from Images of Sediment Surfaces and Thin Sections, 
-and Other Natural Granular Patterns, Sedimentology 60, 1709 - 1732
+Buscombe, D. (2013) Transferable Wavelet Method for Grain-Size Distribution from Images of Sediment Surfaces and Thin Sections, and Other Natural Granular Patterns, Sedimentology 60, 1709 - 1732
 
  Author:  Daniel Buscombe
            Grand Canyon Monitoring and Research Center
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
+ Revision Mar 1, 2015
  First Revision January 18 2013
 
 For more information visit https://github.com/dbuscombe-usgs/pyDGS
@@ -138,5 +127,4 @@ https://github.com/dbuscombe-usgs
 See also the project blog: 
 http://dbuscombe-usgs.github.com/
 
-Please download, try, report bugs, fork, modify, evaluate, discuss. 
-Thanks for stopping by!
+Please download, try, report bugs, fork, modify, evaluate, discuss. Thanks for stopping by!

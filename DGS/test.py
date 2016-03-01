@@ -4,7 +4,7 @@
            United States Geological Survey
            Flagstaff, AZ 86001
            dbuscombe@usgs.gov
- Revision Oct 27, 2015
+ Revision Mar 1, 2016
  First Revision January 18 2013
 
 For more information visit https://github.com/dbuscombe-usgs/DGS-python
@@ -21,8 +21,8 @@ For more information visit https://github.com/dbuscombe-usgs/DGS-python
     and does not imply endorsement by the U.S. government.
 """
 
-#python -c "import DGSweb; DGSweb.test.dotest()"
-import DGSweb
+#python -c "import DGS; DGS.test.dotest()"
+import DGS
 import os
 
 __all__ = [
@@ -34,7 +34,7 @@ def dotest():
    dotest_web()
 
 def dotest_web():
-   image= DGSweb.__path__[0]+os.sep+'IMG_0229.JPG'
+   image= DGS.__path__[0]+os.sep+'IMG_0229.JPG'
    resolution = 1
    density = 10
    dofilter=1
@@ -42,7 +42,7 @@ def dotest_web():
    notes=8
    verbose=1
 
-   DGSweb.dgs(image, density, resolution, dofilter, maxscale, notes, verbose)
+   DGS.dgs(image, density, resolution, dofilter, maxscale, notes, verbose)
 
 if __name__ == '__main__':
    dotest()
